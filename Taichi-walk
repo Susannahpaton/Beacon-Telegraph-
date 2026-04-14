@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T'ai Chi Walking</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #f9f8f5; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem 3rem; color: #3a3a3a; }
+  .eyebrow { letter-spacing: 0.2em; font-size: 0.68rem; text-transform: uppercase; color: #aaa; margin-bottom: 0.4rem; margin-top: 1.5rem; }
+  h1 { font-size: 2.2rem; font-weight: 400; margin-bottom: 0.3rem; text-align: center; }
+  .subtitle { font-style: italic; color: #7a9e7e; font-size: 0.9rem; margin-bottom: 1.8rem; text-align: center; }
+  .card { background: #fff; border-radius: 1.5rem; padding: 1.8rem; max-width: 500px; width: 100%; box-shadow: 0 4px 28px rgba(0,0,0,0.07); }
+  .leaf { font-size: 2.5rem; text-align: center; margin-bottom: 0.8rem; }
+  .intro-title { font-size: 1.2rem; text-align: center; margin-bottom: 0.7rem; }
+  .intro-text { text-align: center; color: #777; font-size: 0.87rem; line-height: 1.75; margin-bottom: 1.4rem; }
+  hr { border: none; border-top: 1px solid #eee; margin-bottom: 1.2rem; }
+  .section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: #bbb; text-align: center; margin-bottom: 0.7rem; }
+  .mode-btns { display: flex; gap: 0.7rem; margin-bottom: 1.4rem; }
+  .mode-btn { flex: 1; padding: 0.75rem 0.5rem; border-radius: 1rem; border: 2px solid #e8e4dc; background: #fff; cursor: pointer; font-family: 'Georgia', serif; font-size: 0.82rem; color: #888; line-height: 1.45; transition: all 0.2s; text-align: center; }
+  .mode-btn.selected { border-color: #7a9e7e; background: #f0f7f0; color: #3a6b3e; }
+  .mode-btn strong { display: block; font-size: 0.88rem; margin-bottom: 0.15rem; }
+  .ambient-btns { display: flex; gap: 0.5rem; margin-bottom: 1.4rem; }
+  .ambient-btn { flex: 1; padding: 0.55rem 0.2rem; border-radius: 0.9rem; border: 2px solid #e8e4dc; background: #fff; cursor: pointer; font-size: 0.78rem; color: #888; transition: all 0.2s; text-align: center; line-height: 1.5; font-family: 'Georgia', serif; position: relative; }
+  .ambient-btn .amb-icon { font-size: 1.1rem; display: block; margin-bottom: 0.1rem; }
+  .ambient-btn.selected { border-color: #c8a882; background: #fdf6ee; color: #8a6a3e; }
+  .ambient-btn.previewing { border-color: #7a9e7e; background: #f0f7f0; color: #3a6b3e; }
+  .preview-dot { display: none; width: 5px; height: 5px; background: #7a9e7e; border-radius: 50%; position: absolute; top: 5px; right: 6px; animation: pulse 0.9s infinite; }
+  .ambient-btn.previewing .preview-dot { display: block; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+  /* Compact sound switcher used on prep + practice pages */
+  .sound-switcher { display: flex; gap: 0.4rem; justify-content: center; margin-bottom: 0.9rem; }
+  .sound-sw-btn { padding: 0.35rem 0.7rem; border-radius: 2rem; border: 1.5px solid #e8e4dc; background: #fff; cursor: pointer; font-size: 0.75rem; color: #aaa; transition: all 0.18s; font-family: 'Georgia', serif; }
+  .sound-sw-btn.selected { border-color: #c8a882; background: #fdf6ee; color: #8a6a3e; }
+  .sound-sw-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: #ccc; text-align: center; margin-bottom: 0.4rem; }
+  .step-list { list-style: none; }
+  .step-item { display: flex; align-items: flex-start; padding: 0.9rem 0; border-bottom: 1px solid #f0f0f0; gap: 0.75rem; }
+  .step-item:last-child { border-bottom: none; }
+  .step-icon { font-size: 1.2rem; margin-top: 0.05rem; flex-shrink: 0; width: 1.6rem; text-align: center; }
+  .step-text { flex: 1; }
+  .step-name { font-size: 0.93rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .step-desc { font-size: 0.78rem; color: #888; line-height: 1.6; margin-bottom: 0.25rem; }
+  .step-breath { font-size: 0.75rem; color: #7a9e7e; font-style: italic; line-height: 1.5; }
+  .step-duration { color: #c8a882; font-size: 0.78rem; flex-shrink: 0; margin-top: 0.1rem; white-space: nowrap; }
+  .btn { display: block; width: 100%; margin-top: 1.6rem; padding: 0.95rem; background: #f5f3ef; border: none; border-radius: 2rem; font-family: 'Georgia', serif; font-size: 0.95rem; color: #555; cursor: pointer; transition: background 0.2s; }
+  .btn:hover { background: #e8e4dc; }
+  .btn-green { background: #e8f2e8; color: #3a6b3e; }
+  .btn-green:hover { background: #d5ebd5; }
+  #prep-view { display: none; flex-direction: column; align-items: center; max-width: 500px; width: 100%; }
+  #prep-view.active { display: flex; }
+  .prep-card { background: #fff; border-radius: 1.5rem; padding: 2rem 1.8rem; width: 100%; box-shadow: 0 4px 28px rgba(0,0,0,0.07); text-align: center; }
+  .prep-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: #bbb; margin-bottom: 0.6rem; }
+  .prep-icon { font-size: 2.8rem; margin-bottom: 0.6rem; }
+  .prep-name { font-size: 1.5rem; font-weight: 400; margin-bottom: 0.4rem; }
+  .prep-duration { font-size: 0.8rem; color: #c8a882; margin-bottom: 0.6rem; }
+  .ambient-pill { display: inline-block; font-size: 0.72rem; color: #c8a882; background: #fdf6ee; padding: 0.25rem 0.75rem; border-radius: 2rem; margin-bottom: 0.8rem; }
+  .prep-desc-box { background: #f9f8f5; border-radius: 0.9rem; padding: 1rem 1.1rem; text-align: left; margin-bottom: 1rem; }
+  .prep-desc-box p { font-size: 0.86rem; color: #555; line-height: 1.75; margin-bottom: 0.7rem; }
+  .prep-desc-box p:last-child { margin-bottom: 0; }
+  .prep-breath-note { font-size: 0.82rem; color: #7a9e7e; font-style: italic; line-height: 1.6; }
+  .auto-countdown { font-size: 1rem; color: #bbb; margin-bottom: 0.8rem; }
+  .auto-countdown span { color: #7a9e7e; font-size: 1.3rem; font-weight: 600; }
+  #practice-view { display: none; flex-direction: column; align-items: center; max-width: 500px; width: 100%; }
+  #practice-view.active { display: flex; }
+  .practice-card { background: #fff; border-radius: 1.5rem; padding: 1.8rem; width: 100%; box-shadow: 0 4px 28px rgba(0,0,0,0.07); }
+  .practice-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+  .practice-step-counter { font-size: 0.75rem; color: #bbb; letter-spacing: 0.1em; text-transform: uppercase; }
+  .badges { display: flex; gap: 0.4rem; }
+  .badge { font-size: 0.68rem; border: 1px solid; border-radius: 1rem; padding: 0.2rem 0.55rem; }
+  .badge-mode { color: #7a9e7e; border-color: #c5dfc5; }
+  .badge-sound { color: #c8a882; border-color: #e8d5bc; }
+  .practice-icon { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem; }
+  .practice-step-name { font-size: 1.5rem; font-weight: 400; text-align: center; margin-bottom: 0.8rem; }
+  .practice-desc-box { background: #f9f8f5; border-radius: 0.9rem; padding: 0.85rem 1rem; margin-bottom: 1rem; }
+  .practice-desc-box p { font-size: 0.84rem; color: #555; line-height: 1.7; margin-bottom: 0.5rem; }
+  .practice-desc-box p:last-child { margin-bottom: 0; }
+  .practice-breath { font-size: 0.8rem; color: #7a9e7e; font-style: italic; }
+  .timer-row { display: flex; align-items: baseline; justify-content: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+  .practice-timer { font-size: 4rem; font-weight: 300; color: #7a9e7e; }
+  .timer-unit { font-size: 0.8rem; color: #bbb; }
+  .progress-bar { width: 100%; height: 5px; background: #eee; border-radius: 3px; margin-bottom: 1rem; }
+  .progress-fill { height: 100%; background: #7a9e7e; border-radius: 3px; transition: width 1s linear; }
+  .practice-nav { display: flex; gap: 0.7rem; justify-content: center; margin-bottom: 0.8rem; }
+  .practice-nav button { padding: 0.5rem 1.1rem; border-radius: 2rem; border: 1px solid #ddd; background: #fff; cursor: pointer; font-family: 'Georgia', serif; font-size: 0.88rem; color: #555; }
+  .practice-nav button:hover { background: #f5f3ef; }
+  #complete-view { display: none; flex-direction: column; align-items: center; max-width: 500px; width: 100%; }
+  #complete-view.active { display: flex; }
+  .complete-card { background: #fff; border-radius: 1.5rem; padding: 2.5rem 1.8rem; width: 100%; box-shadow: 0 4px 28px rgba(0,0,0,0.07); text-align: center; }
+  .complete-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .complete-title { font-size: 1.6rem; font-weight: 400; margin-bottom: 0.7rem; color: #7a9e7e; }
+  .complete-text { font-size: 0.9rem; color: #777; line-height: 1.9; }
+  #home-view { max-width: 500px; width: 100%; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="eyebrow">9-Minute Practice</div>
+<h1>T'ai Chi Walking</h1>
+<p class="subtitle">Fitness &middot; Flexibility &middot; Presence</p>
+
+<div id="home-view">
+  <div class="card">
+    <div class="leaf">&#127807;</div>
+    <p class="intro-title">Your Practice Awaits</p>
+    <p class="intro-text">A 9-minute sequence blending classical t'ai chi movement with mindful walking. Find a clear, quiet space of 5&ndash;10 metres. Remove your shoes if possible. Move slowly. There is nowhere to rush to.</p>
+
+```
+<div class="section-label">Choose your mode</div>
+<div class="mode-btns">
+  <button class="mode-btn selected" id="btn-guided" onclick="selectMode('guided')">
+    <strong>&#9711; Guided</strong>Each step begins when you are ready. Ideal for beginners.
+  </button>
+  <button class="mode-btn" id="btn-flow" onclick="selectMode('flow')">
+    <strong>&#9654; Flow</strong>Steps advance automatically. For experienced practitioners.
+  </button>
+</div>
+
+<div class="section-label">Ambient sound</div>
+<div class="ambient-btns">
+  <button class="ambient-btn selected" id="amb-none" onclick="selectAmbient('none')"><span class="amb-icon">&#128263;</span>Off<span class="preview-dot"></span></button>
+  <button class="ambient-btn" id="amb-rain" onclick="selectAmbient('rain')"><span class="amb-icon">&#127783;</span>Rain<span class="preview-dot"></span></button>
+  <button class="ambient-btn" id="amb-ocean" onclick="selectAmbient('ocean')"><span class="amb-icon">&#127754;</span>Ocean<span class="preview-dot"></span></button>
+  <button class="ambient-btn" id="amb-drone" onclick="selectAmbient('drone')"><span class="amb-icon">&#127926;</span>Drone<span class="preview-dot"></span></button>
+</div>
+
+<hr>
+<ul class="step-list">
+  <li class="step-item"><span class="step-icon">&#127807;</span><span class="step-text"><div class="step-name">Root &amp; Breathe</div><div class="step-desc">Stand feet shoulder-width apart. Soften the knees. Let your arms hang completely heavy and loose. Close your eyes and feel the ground supporting your full weight. Allow the body to fully arrive here.</div><div class="step-breath">Breathe: Inhale through the nose for 4 counts, belly expanding first then chest. Exhale through the mouth for 6 counts, releasing all tension downward through the feet into the earth.</div></span><span class="step-duration">60s</span></li>
+  <li class="step-item"><span class="step-icon">&#129718;</span><span class="step-text"><div class="step-name">Silk Thread Walk</div><div class="step-desc">Walk forward as though a fine silk thread drawn from your sternum leads you gently onward. Each step lands heel first, weight rolling slowly through the sole to the toe. Arms swing in gentle natural opposition. The motion is continuous — even the pause between steps contains quiet movement.</div><div class="step-breath">Breathe: Inhale as one foot lifts and travels forward. Exhale as it lands and your weight settles completely into it. Let the breath follow the step.</div></span><span class="step-duration">90s</span></li>
+  <li class="step-item"><span class="step-icon">&#9729;&#65039;</span><span class="step-text"><div class="step-name">Cloud Hands Walk</div><div class="step-desc">Step sideways along your space. Sweep both hands in slow horizontal circles before you — one rises while the other descends in a continuous flowing motion. Fingers are relaxed, palms soft and open. Let your gaze follow the upper hand with soft, unfocused eyes. Imagine moving through warm, gently resistant water.</div><div class="step-breath">Breathe: Inhale slowly as your hands and gaze rise. Exhale softly as they descend and sweep around. Let the breath be as fluid and unhurried as the movement itself.</div></span><span class="step-duration">90s</span></li>
+  <li class="step-item"><span class="step-icon">&#128009;</span><span class="step-text"><div class="step-name">Dragon Steps</div><div class="step-desc">Step into a long, wide stance — front knee bent deeply, back leg extended and grounded. Raise the front arm to shoulder height, palm facing out; draw the back hand to the hip, palm facing up. Feel power in the legs and openness across the chest. Hold for two full breaths. Then shift, turn, and step into the posture on the opposite side.</div><div class="step-breath">Breathe: Inhale deeply as you step and open into the posture, chest and belly expanding. Hold gently. Exhale fully and completely as you shift and turn toward the other side.</div></span><span class="step-duration">90s</span></li>
+  <li class="step-item"><span class="step-icon">&#127754;</span><span class="step-text"><div class="step-name">Wave Body Walk</div><div class="step-desc">Walk forward and allow a gentle wave to travel upward through the body with each step — beginning deep in the hips, moving through the spine, the shoulder blades, releasing softly through the fingers. Arms float loosely at your sides, responding to the wave. The whole body becomes water in unhurried, continuous motion.</div><div class="step-breath">Breathe: Inhale as the wave rises from the hips through the spine. Exhale as it crests through the shoulders and releases through the arms. Let each breath initiate the next wave.</div></span><span class="step-duration">90s</span></li>
+  <li class="step-item"><span class="step-icon">&#9728;&#65039;</span><span class="step-text"><div class="step-name">Press the Sky</div><div class="step-desc">Come to stillness with feet shoulder-width apart. Slowly raise both hands from your sides, wrists leading, palms rotating skyward as your arms rise. At the apex, gently press the palms upward and feel the full spine lengthen from tailbone to crown. Slowly lower the arms on the next breath. Repeat at your own pace — let the breath set the rhythm entirely.</div><div class="step-breath">Breathe: Inhale for 5 slow counts as arms rise, lungs filling from the bottom. Pause gently at the top. Exhale for 6 counts as arms descend, releasing fully. The breath leads; the arms follow.</div></span><span class="step-duration">90s</span></li>
+  <li class="step-item"><span class="step-icon">&#127807;</span><span class="step-text"><div class="step-name">Quiet Return</div><div class="step-desc">Walk very slowly back toward where you began. Place each foot with complete, unhurried awareness — heel, arch, toe. Arms rest softly at your sides with no effort. Begin to notice sounds around you, the temperature of the air, the quality of light. Let the senses open as the body quietens.</div><div class="step-breath">Breathe: Allow the breath to return entirely to its own natural, uncontrolled rhythm. Do not direct it — simply observe it. On each inhale, feel the foot lift. On each exhale, feel it land with full care.</div></span><span class="step-duration">60s</span></li>
+  <li class="step-item"><span class="step-icon">&#128167;</span><span class="step-text"><div class="step-name">Still Water Finish</div><div class="step-desc">Come to rest with feet together. Both hands folded lightly over the lower belly, one resting on the other. Close your eyes. Feel the warmth of your own hands. Sense the aliveness of the practice settling deeply within you — like the surface of water becoming perfectly still after a stone has passed through it. You have arrived.</div><div class="step-breath">Breathe: Three final intentional breaths. Inhale through the nose for 5 counts, belly rising beneath your hands. Hold gently for 2 counts. Exhale through the mouth for 7 counts — long, complete, releasing everything. With each exhale, let go a little more.</div></span><span class="step-duration">60s</span></li>
+</ul>
+<button class="btn btn-green" onclick="beginPractice()">Begin Practice</button>
+```
+
+  </div>
+</div>
+
+<div id="prep-view">
+  <div class="prep-card">
+    <div class="prep-label" id="prep-label">First up &bull; Step 1 of 8</div>
+    <div class="prep-icon" id="prep-icon">&#127807;</div>
+    <div class="prep-name" id="prep-name">Root &amp; Breathe</div>
+    <div class="prep-duration" id="prep-duration">60 seconds</div>
+    <div class="ambient-pill hidden" id="ambient-pill"></div>
+    <div class="prep-desc-box">
+      <p id="prep-desc"></p>
+      <p class="prep-breath-note" id="prep-breath"></p>
+    </div>
+    <div class="auto-countdown hidden" id="auto-countdown">Starting in <span id="countdown-num">8</span>...</div>
+    <button class="btn btn-green hidden" id="prep-start-btn" onclick="startStep()">I am ready &mdash; Begin</button>
+    <div style="margin-top:1.2rem;">
+      <div class="sound-sw-label">Sound</div>
+      <div class="sound-switcher" id="prep-sound-switcher">
+        <button class="sound-sw-btn selected" id="psw-none"  onclick="switchAmbient('none')" >&#128263; Off</button>
+        <button class="sound-sw-btn"          id="psw-rain"  onclick="switchAmbient('rain')" >&#127783; Rain</button>
+        <button class="sound-sw-btn"          id="psw-ocean" onclick="switchAmbient('ocean')">&#127754; Ocean</button>
+        <button class="sound-sw-btn"          id="psw-drone" onclick="switchAmbient('drone')">&#127926; Drone</button>
+      </div>
+    </div>
+    <button class="btn" onclick="endPractice()">End Practice</button>
+  </div>
+</div>
+
+<div id="practice-view">
+  <div class="practice-card">
+    <div class="practice-top">
+      <span class="practice-step-counter" id="p-counter">Step 1 of 8</span>
+      <span class="badges">
+        <span class="badge badge-mode" id="p-mode-badge">Guided</span>
+        <span class="badge badge-sound hidden" id="p-sound-badge"></span>
+      </span>
+    </div>
+    <div class="practice-icon" id="p-icon">&#127807;</div>
+    <div class="practice-step-name" id="p-name">Root &amp; Breathe</div>
+    <div class="practice-desc-box">
+      <p id="p-desc"></p>
+      <p class="practice-breath" id="p-breath"></p>
+    </div>
+    <div class="timer-row">
+      <div class="practice-timer" id="p-timer">60</div>
+      <div class="timer-unit">sec</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="p-fill" style="width:100%"></div></div>
+    <div class="practice-nav">
+      <button onclick="prevStep()">&larr; Back</button>
+      <button onclick="togglePause()" id="pause-btn">Pause</button>
+      <button onclick="skipStep()">Skip &rarr;</button>
+    </div>
+    <div style="margin-bottom:0.6rem;">
+      <div class="sound-sw-label">Sound</div>
+      <div class="sound-switcher" id="prac-sound-switcher">
+        <button class="sound-sw-btn selected" id="xsw-none"  onclick="switchAmbient('none')" >&#128263; Off</button>
+        <button class="sound-sw-btn"          id="xsw-rain"  onclick="switchAmbient('rain')" >&#127783; Rain</button>
+        <button class="sound-sw-btn"          id="xsw-ocean" onclick="switchAmbient('ocean')">&#127754; Ocean</button>
+        <button class="sound-sw-btn"          id="xsw-drone" onclick="switchAmbient('drone')">&#127926; Drone</button>
+      </div>
+    </div>
+    <button class="btn" onclick="endPractice()">End Practice</button>
+  </div>
+</div>
+
+<div id="complete-view">
+  <div class="complete-card">
+    <div class="complete-icon">&#10024;</div>
+    <div class="complete-title">Practice Complete</div>
+    <p class="complete-text">You have completed your 9-minute t'ai chi walking practice.<br><br>Stand quietly for a moment before you move on.<br>Let the stillness settle fully within you.<br><br><em>Well done. Stand steady.</em></p>
+    <button class="btn btn-green" style="margin-top:1.8rem;" onclick="endPractice()">Return to Home</button>
+  </div>
+</div>
+
+<script>
+const steps = [
+  { name:"Root & Breathe", icon:"&#127807;", duration:60,
+    desc:"Stand with feet shoulder-width apart. Soften the knees slightly. Let your arms hang completely heavy and loose at your sides. Close or lower your eyes and feel the ground supporting your full weight. Allow the body to fully arrive here.",
+    breath:"Breathe: Inhale through the nose for 4 counts, belly expanding first then chest. Exhale through the mouth for 6 counts, releasing all tension downward through the feet into the earth." },
+  { name:"Silk Thread Walk", icon:"&#129718;", duration:90,
+    desc:"Walk forward as though a fine silk thread drawn from your sternum leads you gently onward. Each step lands heel first, weight rolling slowly and deliberately through the sole to the toe. Arms swing in gentle natural opposition. The motion is continuous \u2014 even the pause between steps contains quiet movement.",
+    breath:"Breathe: Inhale as one foot lifts and travels forward. Exhale as it lands and your weight settles completely into it. Let the breath follow the step." },
+  { name:"Cloud Hands Walk", icon:"&#9729;&#65039;", duration:90,
+    desc:"Step sideways along your space. Sweep both hands in slow horizontal circles before you \u2014 one rises while the other descends in a continuous flowing motion. Fingers relaxed, palms soft and open. Let your gaze follow the upper hand with soft, unfocused eyes. Imagine moving through warm, gently resistant water.",
+    breath:"Breathe: Inhale slowly as your hands and gaze rise. Exhale softly as they descend and sweep around. Let the breath be as fluid and unhurried as the movement itself." },
+  { name:"Dragon Steps", icon:"&#128009;", duration:90,
+    desc:"Step into a long, wide stance \u2014 front knee bent deeply, back leg extended and grounded. Raise the front arm to shoulder height, palm facing out; draw the back hand to the hip, palm facing up. Feel power in the legs and openness across the chest. Hold for two full breaths. Then shift, turn, and step into the posture on the opposite side.",
+    breath:"Breathe: Inhale deeply as you step and open into the posture, chest and belly expanding. Hold gently. Exhale fully and completely as you shift and turn toward the other side." },
+  { name:"Wave Body Walk", icon:"&#127754;", duration:90,
+    desc:"Walk forward and allow a gentle wave to travel upward through the body with each step \u2014 beginning deep in the hips, moving through the spine, the shoulder blades, releasing softly through the fingers. Arms float loosely at your sides, responding to the wave. The whole body becomes water in unhurried motion.",
+    breath:"Breathe: Inhale as the wave rises from the hips through the spine. Exhale as it crests through the shoulders and releases through the arms. Let each breath initiate the next wave." },
+  { name:"Press the Sky", icon:"&#9728;&#65039;", duration:90,
+    desc:"Come to stillness with feet shoulder-width apart. Slowly raise both hands from your sides, wrists leading, palms rotating skyward as your arms rise. At the apex, gently press the palms upward and feel the full spine lengthen from tailbone to crown. Slowly lower the arms on the next breath. Repeat at your own pace \u2014 let the breath set the rhythm entirely.",
+    breath:"Breathe: Inhale for 5 slow counts as arms rise, lungs filling from the bottom. Pause gently at the top. Exhale for 6 counts as arms descend, releasing fully. The breath leads; the arms follow." },
+  { name:"Quiet Return", icon:"&#127807;", duration:60,
+    desc:"Walk very slowly back toward where you began. Place each foot with complete, unhurried awareness \u2014 heel, arch, toe. Arms rest softly at your sides. Begin to notice sounds around you, the temperature of the air, the quality of light. Let the senses open as the body quietens.",
+    breath:"Breathe: Allow the breath to return to its own natural, uncontrolled rhythm. Do not direct it \u2014 simply observe it. On each inhale, feel the foot lift. On each exhale, feel it land with full care." },
+  { name:"Still Water Finish", icon:"&#128167;", duration:60,
+    desc:"Come to rest with feet together. Both hands folded lightly over the lower belly. Close your eyes. Feel the warmth of your own hands. Sense the aliveness of the practice settling deeply within you \u2014 like the surface of water becoming perfectly still after a stone has passed through it. You have arrived.",
+    breath:"Breathe: Three final intentional breaths. Inhale through the nose for 5 counts, belly rising beneath your hands. Hold gently for 2 counts. Exhale through the mouth for 7 counts \u2014 long, complete, releasing everything. With each exhale, let go a little more." }
+];
+
+const soundLabels = { none:'', rain:'Rain', ocean:'Ocean', drone:'Drone' };
+
+let mode='guided', ambientChoice='none', current=0, remaining=0;
+let stepTimer=null, countdownTimer=null, paused=false, countdownVal=8;
+let ambCtx=null, ambMaster=null, ambSources=[];
+let previewCtx=null, previewMaster=null, previewSources=[], previewTimer=null;
+
+function selectMode(m) {
+  mode=m;
+  document.getElementById('btn-guided').classList.toggle('selected',m==='guided');
+  document.getElementById('btn-flow').classList.toggle('selected',m==='flow');
+}
+
+// ── HOME SCREEN: tap to preview for 3s, tap again to confirm selection ───────
+function selectAmbient(choice) {
+  stopPreview();
+  // If already selected, do nothing extra
+  if (ambientChoice === choice) return;
+  ambientChoice = choice;
+  refreshAllSoundUIs();
+  if (choice === 'none') return;
+  // Play a 3-second preview
+  startPreview(choice);
+}
+
+function startPreview(choice) {
+  stopPreview();
+  document.getElementById('amb-'+choice).classList.add('previewing');
+  try {
+    previewCtx = new (window.AudioContext||window.webkitAudioContext)();
+    previewMaster = previewCtx.createGain();
+    previewMaster.gain.setValueAtTime(0, previewCtx.currentTime);
+    previewMaster.connect(previewCtx.destination);
+    const doPreview = () => {
+      if (!previewCtx) return;
+      previewMaster.gain.setValueAtTime(0, previewCtx.currentTime);
+      previewMaster.gain.linearRampToValueAtTime(0.75, previewCtx.currentTime+0.6);
+      if (choice==='rain')  buildRain(previewCtx, previewMaster, previewSources);
+      if (choice==='ocean') buildOcean(previewCtx, previewMaster, previewSources);
+      if (choice==='drone') buildDrone(previewCtx, previewMaster, previewSources);
+    };
+    if (previewCtx.state === 'suspended') {
+      previewCtx.resume().then(doPreview).catch(doPreview);
+    } else {
+      doPreview();
+    }
+  } catch(e){}
+  previewTimer = setTimeout(stopPreview, 3000);
+}
+
+function stopPreview() {
+  clearTimeout(previewTimer);
+  ['none','rain','ocean','drone'].forEach(id=>{
+    const b=document.getElementById('amb-'+id);
+    if(b) b.classList.remove('previewing');
+  });
+  if (!previewCtx) return;
+  try {
+    previewMaster.gain.setValueAtTime(previewMaster.gain.value, previewCtx.currentTime);
+    previewMaster.gain.linearRampToValueAtTime(0, previewCtx.currentTime+0.5);
+    setTimeout(()=>{
+      previewSources.forEach(s=>{try{s.stop();}catch(e){}});
+      previewSources=[];
+      try{previewCtx.close();}catch(e){}
+      previewCtx=null; previewMaster=null;
+    },700);
+  } catch(e){}
+}
+
+// ── IN-PRACTICE: hot-swap ambient sound immediately ───────────────────────────
+function switchAmbient(choice) {
+  stopPreview();
+  ambientChoice = choice;
+  refreshAllSoundUIs();
+  // If practice is running, swap audio live
+  if (ambCtx) {
+    stopAmbient();
+    if (choice !== 'none') startAmbient();
+  }
+}
+
+// Keep all three sound UIs in sync
+function refreshAllSoundUIs() {
+  // Home screen buttons
+  ['none','rain','ocean','drone'].forEach(id=>{
+    const b=document.getElementById('amb-'+id);
+    if(b) b.classList.toggle('selected', id===ambientChoice);
+  });
+  // Prep page switcher
+  ['none','rain','ocean','drone'].forEach(id=>{
+    const b=document.getElementById('psw-'+id);
+    if(b) b.classList.toggle('selected', id===ambientChoice);
+  });
+  // Practice page switcher
+  ['none','rain','ocean','drone'].forEach(id=>{
+    const b=document.getElementById('xsw-'+id);
+    if(b) b.classList.toggle('selected', id===ambientChoice);
+  });
+  // Sound badge on practice screen
+  const sb=document.getElementById('p-sound-badge');
+  if(sb){
+    if(ambientChoice!=='none'){sb.classList.remove('hidden');sb.textContent=soundLabels[ambientChoice];}
+    else{sb.classList.add('hidden');}
+  }
+  // Ambient pill on prep screen
+  const pill=document.getElementById('ambient-pill');
+  if(pill){
+    if(ambientChoice!=='none'){pill.classList.remove('hidden');pill.textContent=soundLabels[ambientChoice]+' playing';}
+    else{pill.classList.add('hidden');}
+  }
+}
+
+// ── AMBIENT ──────────────────────────────────────────────────────────────────
+function startAmbient() {
+  stopAmbient();
+  if (ambientChoice==='none') return;
+  try {
+    ambCtx = new (window.AudioContext||window.webkitAudioContext)();
+    ambMaster = ambCtx.createGain();
+    ambMaster.gain.setValueAtTime(0, ambCtx.currentTime);
+    ambMaster.connect(ambCtx.destination);
+    const choice = ambientChoice;
+    const doStart = () => {
+      if (!ambCtx) return;
+      ambMaster.gain.setValueAtTime(0, ambCtx.currentTime);
+      ambMaster.gain.linearRampToValueAtTime(0.85, ambCtx.currentTime+4);
+      if (choice==='rain')  buildRain(ambCtx,ambMaster,ambSources);
+      if (choice==='ocean') buildOcean(ambCtx,ambMaster,ambSources);
+      if (choice==='drone') buildDrone(ambCtx,ambMaster,ambSources);
+    };
+    if (ambCtx.state === 'suspended') {
+      ambCtx.resume().then(doStart).catch(doStart);
+    } else {
+      doStart();
+    }
+  } catch(e){}
+}
+
+function stopAmbient() {
+  if (!ambCtx) return;
+  try {
+    ambMaster.gain.setValueAtTime(ambMaster.gain.value,ambCtx.currentTime);
+    ambMaster.gain.linearRampToValueAtTime(0,ambCtx.currentTime+2.5);
+    setTimeout(()=>{
+      ambSources.forEach(s=>{try{s.stop();}catch(e){}});
+      ambSources=[];
+      try{ambCtx.close();}catch(e){}
+      ambCtx=null; ambMaster=null;
+    },3000);
+  } catch(e){}
+}
+
+function buildRain(ctx,dest,sources) {
+  const rate=ctx.sampleRate, buf=ctx.createBuffer(1,rate*5,rate), d=buf.getChannelData(0);
+  let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+  for(let i=0;i<d.length;i++){
+    const w=Math.random()*2-1;
+    b0=0.99886*b0+w*0.0555179; b1=0.99332*b1+w*0.0750759;
+    b2=0.96900*b2+w*0.1538520; b3=0.86650*b3+w*0.3104856;
+    b4=0.55000*b4+w*0.5329522; b5=-0.7616*b5-w*0.0168980;
+    d[i]=(b0+b1+b2+b3+b4+b5+b6+w*0.5362)*0.11; b6=w*0.115926;
+  }
+  const src=ctx.createBufferSource(); src.buffer=buf; src.loop=true;
+  const hp=ctx.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=400;
+  const bp=ctx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=1600; bp.Q.value=0.5;
+  const g=ctx.createGain(); g.gain.value=0.7;
+  src.connect(hp); hp.connect(bp); bp.connect(g); g.connect(dest);
+  src.start(); sources.push(src);
+}
+
+function buildOcean(ctx,dest,sources) {
+  const rate=ctx.sampleRate, buf=ctx.createBuffer(1,rate*6,rate), d=buf.getChannelData(0);
+  let last=0;
+  for(let i=0;i<d.length;i++){const w=Math.random()*2-1;last=(last+0.02*w)/1.02;d[i]=last*3.5;}
+  const src=ctx.createBufferSource(); src.buffer=buf; src.loop=true;
+  const lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=650;
+  const ng=ctx.createGain(); ng.gain.value=0.5;
+  const lfo=ctx.createOscillator(), lfoG=ctx.createGain();
+  lfo.frequency.value=0.065; lfoG.gain.value=0.28;
+  lfo.connect(lfoG); lfoG.connect(ng.gain);
+  src.connect(lp); lp.connect(ng); ng.connect(dest);
+  src.start(); lfo.start(); sources.push(src,lfo);
+}
+
+function buildDrone(ctx,dest,sources) {
+  [[110,0.15,0.12,0.25],[165,0.10,0.17,0.20],[220,0.08,0.09,0.30],[275,0.05,0.21,0.18],[330,0.04,0.14,0.15]].forEach(([f,gv,vr,vd])=>{
+    const osc=ctx.createOscillator(), g=ctx.createGain();
+    const vLFO=ctx.createOscillator(), vG=ctx.createGain();
+    osc.type='sine'; osc.frequency.value=f;
+    vLFO.frequency.value=vr; vG.gain.value=vd;
+    vLFO.connect(vG); vG.connect(osc.frequency);
+    g.gain.value=gv; osc.connect(g); g.connect(dest);
+    osc.start(); vLFO.start(); sources.push(osc,vLFO);
+  });
+}
+
+// ── BELL ─────────────────────────────────────────────────────────────────────
+function playBell() {
+  try {
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const play = () => {
+      const now = ctx.currentTime;
+      [[528,0.28,2.8],[792,0.12,2.0],[1056,0.05,1.4]].forEach(([f,vol,dur])=>{
+        const osc=ctx.createOscillator(), g=ctx.createGain();
+        osc.type='sine'; osc.frequency.value=f;
+        g.gain.setValueAtTime(0,now); g.gain.linearRampToValueAtTime(vol,now+0.01);
+        g.gain.exponentialRampToValueAtTime(0.001,now+dur);
+        osc.connect(g); g.connect(ctx.destination); osc.start(now); osc.stop(now+dur+0.1);
+      });
+      setTimeout(()=>ctx.close(),3500);
+    };
+    if (ctx.state === 'suspended') {
+      ctx.resume().then(play).catch(play);
+    } else {
+      play();
+    }
+  } catch(e){}
+}
+
+// ── FLOW ─────────────────────────────────────────────────────────────────────
+function beginPractice() {
+  stopPreview();
+  document.getElementById('home-view').classList.add('hidden');
+  startAmbient();
+  showPrep(0);
+}
+
+function showPrep(i) {
+  clearInterval(stepTimer); clearInterval(countdownTimer);
+  if (i>=steps.length){showComplete();return;}
+  current=i;
+  const s=steps[i];
+  document.getElementById('prep-label').textContent=(i===0?'First up':'Next up')+' \u2022 Step '+(i+1)+' of '+steps.length;
+  document.getElementById('prep-icon').innerHTML=s.icon;
+  document.getElementById('prep-name').textContent=s.name;
+  document.getElementById('prep-duration').textContent=s.duration+' seconds';
+  document.getElementById('prep-desc').textContent=s.desc;
+  document.getElementById('prep-breath').textContent=s.breath;
+  refreshAllSoundUIs();
+  document.getElementById('practice-view').classList.remove('active');
+  document.getElementById('complete-view').classList.remove('active');
+  document.getElementById('prep-view').classList.add('active');
+  if(mode==='flow'){
+    document.getElementById('auto-countdown').classList.remove('hidden');
+    document.getElementById('prep-start-btn').classList.add('hidden');
+    countdownVal=8; document.getElementById('countdown-num').textContent=countdownVal;
+    countdownTimer=setInterval(()=>{
+      countdownVal--; document.getElementById('countdown-num').textContent=countdownVal;
+      if(countdownVal<=0){clearInterval(countdownTimer);startStep();}
+    },1000);
+  } else {
+    document.getElementById('auto-countdown').classList.add('hidden');
+    document.getElementById('prep-start-btn').classList.remove('hidden');
+  }
+}
+
+function startStep() {
+  clearInterval(countdownTimer);
+  const s=steps[current]; remaining=s.duration; paused=false;
+  document.getElementById('p-counter').textContent='Step '+(current+1)+' of '+steps.length;
+  document.getElementById('p-mode-badge').textContent=mode==='guided'?'Guided':'Flow';
+  document.getElementById('p-icon').innerHTML=s.icon;
+  document.getElementById('p-name').textContent=s.name;
+  document.getElementById('p-desc').textContent=s.desc;
+  document.getElementById('p-breath').textContent=s.breath;
+  document.getElementById('pause-btn').textContent='Pause';
+  refreshAllSoundUIs();
+  updateDisplay();
+  document.getElementById('prep-view').classList.remove('active');
+  document.getElementById('practice-view').classList.add('active');
+  clearInterval(stepTimer);
+  stepTimer=setInterval(tick,1000);
+}
+
+function tick() {
+  if(paused)return;
+  remaining--;
+  updateDisplay();
+  if(remaining<=0){clearInterval(stepTimer);playBell();setTimeout(()=>showPrep(current+1),1400);}
+}
+
+function updateDisplay() {
+  document.getElementById('p-timer').textContent=remaining;
+  document.getElementById('p-fill').style.width=(remaining/steps[current].duration*100)+'%';
+}
+
+function togglePause(){paused=!paused;document.getElementById('pause-btn').textContent=paused?'Resume':'Pause';}
+function skipStep(){clearInterval(stepTimer);playBell();setTimeout(()=>showPrep(current+1),600);}
+function prevStep(){clearInterval(stepTimer);clearInterval(countdownTimer);showPrep(Math.max(0,current-1));}
+
+function showComplete() {
+  clearInterval(stepTimer); clearInterval(countdownTimer);
+  playBell(); stopAmbient();
+  setTimeout(()=>{
+    document.getElementById('prep-view').classList.remove('active');
+    document.getElementById('practice-view').classList.remove('active');
+    document.getElementById('complete-view').classList.add('active');
+  },900);
+}
+
+function endPractice() {
+  clearInterval(stepTimer); clearInterval(countdownTimer);
+  stopAmbient();
+  ['prep-view','practice-view','complete-view'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  document.getElementById('home-view').classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
