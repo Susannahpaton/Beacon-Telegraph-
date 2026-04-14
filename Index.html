@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Beacon Telegraph — Marketing Copy Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory: #FDFBF7; --parchment: #F5F0E8; --linen: #EDE7DC; --fog: #E0D9CF;
+  --navy: #1C3557; --amber: #D4893A; --amber-pale: #FBF3E8;
+  --sage: #6B8F71; --sage-pale: #EDF3EE;
+  --sky: #8AACCF; --sky-pale: #EEF4FA; --sky-mid: #5E8EB8;
+  --mid: #5C5045; --stone: #8C7E72; --ghost: #B8AFA6;
+  --morse: #C8A870;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Jost', sans-serif; background: var(--ivory); color: var(--mid); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+/* LAYOUT */
+.page { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+/* HEADER */
+.doc-header { text-align: center; padding: 3rem 0 2.5rem; border-bottom: 1px solid var(–fog); margin-bottom: 3rem; }
+.doc-eyebrow { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(–amber); margin-bottom: 0.8rem; }
+.doc-title { font-family: ‘Cormorant Garamond’, serif; font-size: 2.4rem; font-weight: 400; color: var(–navy); line-height: 1.2; margin-bottom: 0.5rem; }
+.doc-sub { font-family: ‘Cormorant Garamond’, serif; font-size: 1.1rem; font-style: italic; color: var(–stone); }
+.doc-morse { font-size: 0.75rem; letter-spacing: 0.4em; color: var(–morse); margin-top: 1.2rem; }
+
+/* SECTION STRUCTURE */
+.section { margin-bottom: 3.5rem; }
+.section-label {
+font-size: 0.65rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase;
+color: var(–amber); margin-bottom: 0.6rem; display: block;
+}
+.section-title {
+font-family: ‘Cormorant Garamond’, serif; font-size: 1.5rem; font-weight: 400;
+color: var(–navy); margin-bottom: 0.4rem; line-height: 1.3;
+}
+.section-desc { font-size: 0.83rem; color: var(–stone); margin-bottom: 1.5rem; font-style: italic; line-height: 1.65; }
+hr.section-rule { border: none; border-top: 1px solid var(–fog); margin-bottom: 1.5rem; }
+
+/* COPY CARDS */
+.copy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+.copy-grid.single { grid-template-columns: 1fr; }
+.copy-grid.two { grid-template-columns: repeat(2, 1fr); }
+
+.copy-card {
+background: #fff; border: 1px solid var(–fog); border-radius: 0.9rem;
+padding: 1.4rem 1.5rem; position: relative;
+}
+.copy-card.amber { border-left: 3px solid var(–amber); background: var(–amber-pale); }
+.copy-card.sage { border-left: 3px solid var(–sage); background: var(–sage-pale); }
+.copy-card.sky { border-left: 3px solid var(–sky); background: var(–sky-pale); }
+.copy-card.navy { border-left: 3px solid var(–navy); background: var(–parchment); }
+
+.copy-tag {
+font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+font-weight: 400; margin-bottom: 0.6rem; display: block;
+}
+.copy-tag.amber { color: var(–amber); }
+.copy-tag.sage { color: var(–sage); }
+.copy-tag.sky { color: var(–sky-mid); }
+.copy-tag.navy { color: var(–navy); }
+
+.copy-text {
+font-family: ‘Cormorant Garamond’, serif; font-size: 1.15rem; font-weight: 400;
+color: var(–navy); line-height: 1.55; margin-bottom: 0.5rem;
+}
+.copy-text.large { font-size: 1.4rem; }
+.copy-text.small { font-family: ‘Jost’, sans-serif; font-size: 0.88rem; font-weight: 300; color: var(–mid); font-style: normal; line-height: 1.7; }
+.copy-note { font-size: 0.72rem; color: var(–stone); font-style: italic; margin-top: 0.5rem; }
+
+/* HOOKS — big visual treatment */
+.hook-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+.hook-card {
+background: var(–parchment); border-radius: 1rem; padding: 1.8rem 1.6rem;
+border: 1px solid var(–fog); border-top: 3px solid var(–amber);
+}
+.hook-text {
+font-family: ‘Cormorant Garamond’, serif; font-size: 1.3rem; font-weight: 400;
+color: var(–navy); line-height: 1.45; margin-bottom: 0.7rem;
+}
+.hook-follow {
+font-size: 0.8rem; font-weight: 300; color: var(–stone);
+line-height: 1.65; padding-top: 0.7rem; border-top: 1px solid var(–fog);
+}
+
+/* CAROUSEL POSTS */
+.carousel-post {
+background: #fff; border: 1px solid var(–fog); border-radius: 1rem;
+overflow: hidden; margin-bottom: 1rem;
+}
+.carousel-post-header {
+background: var(–navy); padding: 1.2rem 1.5rem;
+display: flex; align-items: center; justify-content: space-between;
+}
+.carousel-post-header span { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.carousel-post-header strong { font-size: 0.8rem; font-weight: 400; color: rgba(255,255,255,0.9); font-family: ‘Cormorant Garamond’, serif; font-size: 1rem; }
+.carousel-slides { padding: 1.4rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.slide {
+background: var(–parchment); border-radius: 0.7rem; padding: 1.1rem 1rem;
+border: 1px solid var(–fog);
+}
+.slide-num { font-size: 0.65rem; letter-spacing: 0.2em; color: var(–ghost); text-transform: uppercase; margin-bottom: 0.4rem; display: block; }
+.slide-text { font-family: ‘Cormorant Garamond’, serif; font-size: 1rem; color: var(–navy); line-height: 1.45; }
+.slide-text.small { font-family: ‘Jost’, sans-serif; font-size: 0.82rem; color: var(–mid); font-weight: 300; line-height: 1.65; }
+.slide-cta { background: var(–amber); color: #fff; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; display: inline-block; margin-top: 0.6rem; }
+
+/* EMAIL SUBJECTS */
+.email-list { list-style: none; }
+.email-item {
+display: flex; align-items: flex-start; gap: 0.8rem;
+padding: 0.85rem 1rem; border-bottom: 1px solid var(–fog);
+background: #fff; transition: background 0.15s;
+}
+.email-item:first-child { border-radius: 0.7rem 0.7rem 0 0; }
+.email-item:last-child { border-bottom: none; border-radius: 0 0 0.7rem 0.7rem; }
+.email-tag-pill {
+font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+padding: 0.2rem 0.55rem; border-radius: 2rem; font-weight: 400;
+white-space: nowrap; flex-shrink: 0; margin-top: 0.15rem;
+}
+.email-tag-pill.warm { background: var(–amber-pale); color: var(–amber); }
+.email-tag-pill.open { background: var(–sky-pale); color: var(–sky-mid); }
+.email-tag-pill.bold { background: var(–parchment); color: var(–navy); }
+.email-subject { font-size: 0.92rem; color: var(–navy); font-weight: 400; line-height: 1.45; }
+.email-preview { font-size: 0.78rem; color: var(–ghost); margin-top: 0.2rem; }
+
+/* CTA BLOCKS */
+.cta-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+.cta-block { border-radius: 1rem; padding: 1.6rem; }
+.cta-block.amber { background: var(–amber-pale); border: 1px solid rgba(212,137,58,0.2); }
+.cta-block.sage { background: var(–sage-pale); border: 1px solid rgba(107,143,113,0.2); }
+.cta-block.sky { background: var(–sky-pale); border: 1px solid rgba(138,172,207,0.2); }
+.cta-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.6rem; display: block; }
+.cta-label.amber { color: var(–amber); }
+.cta-label.sage { color: var(–sage); }
+.cta-label.sky { color: var(–sky-mid); }
+.cta-heading { font-family: ‘Cormorant Garamond’, serif; font-size: 1.1rem; font-weight: 400; color: var(–navy); line-height: 1.35; margin-bottom: 0.5rem; }
+.cta-body { font-size: 0.8rem; color: var(–mid); line-height: 1.7; margin-bottom: 0.8rem; }
+.cta-btn { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(–navy); border-bottom: 1px solid var(–amber); padding-bottom: 1px; }
+
+/* WORD SWAPS */
+.swap-table { width: 100%; border-collapse: collapse; }
+.swap-table th { text-align: left; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(–ghost); padding: 0.5rem 1rem; background: var(–parchment); }
+.swap-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(–fog); font-size: 0.88rem; vertical-align: top; background: #fff; }
+.swap-table td.avoid { color: #b05050; text-decoration: line-through; }
+.swap-table td.use { color: var(–navy); font-weight: 400; }
+.swap-table td.why { color: var(–stone); font-style: italic; font-size: 0.8rem; }
+
+/* TIKTOK FORMAT */
+.tiktok-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.tiktok-card {
+background: var(–navy); border-radius: 1rem; padding: 1.5rem 1.3rem;
+display: flex; flex-direction: column; min-height: 200px;
+}
+.tiktok-hook { font-family: ‘Cormorant Garamond’, serif; font-size: 1.2rem; font-weight: 400; color: #fff; line-height: 1.4; margin-bottom: auto; }
+.tiktok-hook em { color: var(–amber); font-style: italic; }
+.tiktok-cta { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+.copy-grid.two { grid-template-columns: 1fr; }
+.carousel-slides { grid-template-columns: 1fr; }
+.cta-pair { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+<body>
+<div class="page">
+
+  <div class="doc-header">
+    <p class="doc-eyebrow">The Beacon Telegraph</p>
+    <h1 class="doc-title">Marketing Copy Bank</h1>
+    <p class="doc-sub">Feeling-led hooks, pain point content, and channel-ready copy<br>for The 7-Day Beacon Protocol</p>
+    <p class="doc-morse">· ·  · —  — —</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- SECTION 1: THE CORE HOOKS -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="section">
+    <span class="section-label">Section 01</span>
+    <h2 class="section-title">The Core Feeling Hooks</h2>
+    <p class="section-desc">These are scroll-stopping opening lines — the ones that make the right person pause and think "that's me." Lead with one of these on every post, every email, every ad. No explanation, no label, no diagnosis. Just the feeling — spoken back to them clearly.</p>
+    <hr class="section-rule">
+    <div class="hook-grid">
+
+```
+  <div class="hook-card">
+    <div class="hook-text">"Tired in a way that sleep doesn't fix."</div>
+    <p class="hook-follow">This is the most universally recognised description of the state. Clinical research confirms it's the defining complaint. Use as an opening line alone — nothing else on the graphic.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"You keep functioning. But you don't know for how much longer."</div>
+    <p class="hook-follow">Speaks to the quietly unravelling professional. Acknowledges the performance without praising it. Creates a mirror moment.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"You used to care about things. Now you just manage them."</div>
+    <p class="hook-follow">Captures the shift from engagement to maintenance mode — one of the most painful aspects of the state. Instantly recognisable.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"Something has gone quiet inside you."</div>
+    <p class="hook-follow">Speaks to the spiritual displacement profile. Gentle, poetic, non-clinical. Ideal for Instagram and slower content.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"You've tried the things. They helped for a while. Then you were back here."</div>
+    <p class="hook-follow">Acknowledges the failed recovery cycles without blame. Creates immediate trust — you're not being sold another quick fix.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"The version of yourself you used to be doesn't feel that far away. Just — unreachable."</div>
+    <p class="hook-follow">The most emotionally resonant hook for those mid-recovery. The gap between who they were and who they are now is the lived experience of this state.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"You give a lot. To everyone. And you don't know who gives back to you."</div>
+    <p class="hook-follow">Speaks directly to the compassion-fatigued giver profile — carers, parents, healthcare workers, teachers. High-share potential.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"You're not broken. You're running on the wrong signal."</div>
+    <p class="hook-follow">The reframe hook — validates their experience while offering a new frame. Leads naturally into The Beacon Telegraph's mission language. Strong for bios and profile descriptions.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"When did resting start feeling like something you have to earn?"</div>
+    <p class="hook-follow">A question rather than a statement — creates a pause, invites reflection. Excellent for carousels and email subjects. The guilt-about-rest pain point is near-universal.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"There's a part of you that remembers what it felt like to be fully yourself. It hasn't gone anywhere."</div>
+    <p class="hook-follow">The positive mirror — meets people in the loss but immediately pivots to hope. Perfect as a closing slide on a carousel or a sign-off on an email.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"You're excellent at keeping things together. That's not the same as being okay."</div>
+    <p class="hook-follow">Speaks to the high achiever and the quietly unravelling professional. Acknowledges the competence while naming the gap.</p>
+  </div>
+
+  <div class="hook-card">
+    <div class="hook-text">"What if the exhaustion isn't the problem — it's the message?"</div>
+    <p class="hook-follow">Reframes fatigue as intelligent communication. Opens into the nervous-system-as-signal language of the Protocol. Strong for mid-funnel content.</p>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- SECTION 2: LANGUAGE SWAPS -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="section">
+    <span class="section-label">Section 02</span>
+    <h2 class="section-title">Language to Avoid — and What to Say Instead</h2>
+    <p class="section-desc">The words we choose either open the door or close it. These swaps are based on how people describe their own experience versus the clinical or marketing language that distances them from it.</p>
+    <hr class="section-rule">
+    <table class="swap-table">
+      <tr>
+        <th>Avoid</th>
+        <th>Use Instead</th>
+        <th>Why</th>
+      </tr>
+      <tr>
+        <td class="avoid">Burnout</td>
+        <td class="use">"Running on empty" / "That particular kind of tired" / "When everything has cost more than it gave back"</td>
+        <td class="why">People in this state often don't self-identify as "burnt out" — the word feels like a failure label. The feeling is immediate and unambiguous.</td>
+      </tr>
+      <tr>
+        <td class="avoid">Recovery / healing</td>
+        <td class="use">Restoration / return / coming back to yourself</td>
+        <td class="why">"Recovery" implies sickness. "Return" implies you were always whole — you just drifted from yourself. Completely different emotional register.</td>
+      </tr>
+      <tr>
+        <td class="avoid">Self-care</td>
+        <td class="use">Practice / restoration / the work of return</td>
+        <td class="why">"Self-care" has been so heavily commodified it has become meaningless — and often triggers eye-rolling in the high-achiever audience. "Practice" carries depth.</td>
+      </tr>
+      <tr>
+        <td class="avoid">Wellness / wellbeing</td>
+        <td class="use">Steadiness / frequency / signal / inner life</td>
+        <td class="why">"Wellness" reads as an industry. The Beacon Telegraph language is philosophical and maritime — it belongs to no trend.</td>
+      </tr>
+      <tr>
+        <td class="avoid">Mental health</td>
+        <td class="use">The quality of your inner life / what's happening underneath</td>
+        <td class="why">Not because mental health is not important — but because leading with it triggers clinical associations and may repel people who don't identify as struggling with mental health.</td>
+      </tr>
+      <tr>
+        <td class="avoid">Stress management</td>
+        <td class="use">Working with the nervous system / the body as signal</td>
+        <td class="why">"Stress management" implies control and performance. The Beacon Telegraph framework is about listening and responding — fundamentally different posture.</td>
+      </tr>
+      <tr>
+        <td class="avoid">Fix / solve / overcome</td>
+        <td class="use">Return to / restore / find your way back to</td>
+        <td class="why">You don't fix a person. The Protocol's premise is that what they need is already in them — it just needs to be returned to. The language must match the philosophy.</td>
+      </tr>
+      <tr>
+        <td class="avoid">Programme / course / system</td>
+        <td class="use">Practice / protocol / sequence</td>
+        <td class="why">"Programme" triggers images of rigid curricula and pressure to complete. "Practice" and "protocol" suggest something you return to — consistent with the Protocol's approach.</td>
+      </tr>
+      <tr>
+        <td class="avoid">Transform / transformation</td>
+        <td class="use">Restoration / return / a different quality of daily life</td>
+        <td class="why">"Transformation" has been overused to the point of distrust, and implies the current self is inadequate. The Beacon Telegraph's premise is the opposite.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- SECTION 3: INSTAGRAM CAROUSELS -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="section">
+    <span class="section-label">Section 03</span>
+    <h2 class="section-title">Instagram Carousel Frameworks</h2>
+    <p class="section-desc">Each carousel leads with a feeling hook on Slide 1, explores it through 4–6 slides, and ends with a quiet, underpressured call to action. The Protocol is introduced as a possibility, never a prescription.</p>
+    <hr class="section-rule">
+
+```
+<!-- Carousel 1 -->
+<div class="carousel-post">
+  <div class="carousel-post-header">
+    <span>Carousel 01</span>
+    <strong>The tired-that-sleep-doesn't-fix carousel</strong>
+  </div>
+  <div class="carousel-slides">
+    <div class="slide">
+      <span class="slide-num">Slide 1 — Hook</span>
+      <div class="slide-text">"Tired in a way that sleep doesn't fix."</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 2 — Validate</span>
+      <div class="slide-text small">This isn't laziness. It isn't weakness. It's what happens when a nervous system has been running in high alert for so long, it's forgotten what rest actually feels like.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 3 — Name it</span>
+      <div class="slide-text">Sleep restores a tired body. It doesn't restore a dysregulated nervous system. Those are different things.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 4 — The turn</span>
+      <div class="slide-text small">The body hasn't failed you. It's been sending a signal you haven't had a framework to receive. That's what we work with here.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 5 — Practice</span>
+      <div class="slide-text">One thing that helps — right now, in 90 seconds. ↓</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 6 — CTA</span>
+      <div class="slide-text small">The 7-Day Beacon Protocol works with the body, the mind, and the spirit — because all three are involved. Link in bio. No pressure. Just a door.</div>
+      <div class="slide-cta">Link in bio</div>
+    </div>
+  </div>
+</div>
+
+<!-- Carousel 2 -->
+<div class="carousel-post">
+  <div class="carousel-post-header">
+    <span>Carousel 02</span>
+    <strong>The "tried everything" carousel</strong>
+  </div>
+  <div class="carousel-slides">
+    <div class="slide">
+      <span class="slide-num">Slide 1 — Hook</span>
+      <div class="slide-text">"You've tried the things. They helped for a while. Then you were back here."</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 2 — Name the pattern</span>
+      <div class="slide-text small">The yoga helped. The holiday helped. The new routine helped. Until it didn't. And the fact that nothing stuck made you wonder if the problem was you.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 3 — The reframe</span>
+      <div class="slide-text">It wasn't you. It was the angle. Most solutions address the symptoms. Very few go to the source.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 4 — What the source actually is</span>
+      <div class="slide-text small">The source is a nervous system that never learned it was safe to rest. A mind carrying what was never its to carry. A spirit that's gone quiet from neglect.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 5 — The invitation</span>
+      <div class="slide-text">Those three things can be worked with. Gently. Practically. In twenty minutes a day.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 6 — CTA</span>
+      <div class="slide-text small">Seven days. Three pillars. One quiet return to yourself. The Protocol is in the link in bio.</div>
+      <div class="slide-cta">Free download</div>
+    </div>
+  </div>
+</div>
+
+<!-- Carousel 3 -->
+<div class="carousel-post">
+  <div class="carousel-post-header">
+    <span>Carousel 03</span>
+    <strong>The "gone quiet inside" carousel — spiritual profile</strong>
+  </div>
+  <div class="carousel-slides">
+    <div class="slide">
+      <span class="slide-num">Slide 1 — Hook</span>
+      <div class="slide-text">"Something has gone quiet inside you."</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 2 — Deepen it</span>
+      <div class="slide-text small">Not a crisis. Not depression. Just — a frequency you used to be able to find, that you can't locate anymore. Like a signal that's dropped out.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 3 — Validate the intelligence of it</span>
+      <div class="slide-text">That quiet is not the problem. It may be the most intelligent thing your system has done in months.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 4 — The truth</span>
+      <div class="slide-text small">The signal didn't go dark. You've been broadcasting through so much noise that you couldn't hear it. That's different.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 5 — The return</span>
+      <div class="slide-text">"Your signal never went dark." — That's not a platitude. It's a working premise for everything we do here.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 6 — CTA</span>
+      <div class="slide-text small">The 7-Day Beacon Protocol. Seven days to return to the frequency. Link in bio.</div>
+      <div class="slide-cta">Begin here</div>
+    </div>
+  </div>
+</div>
+
+<!-- Carousel 4 -->
+<div class="carousel-post">
+  <div class="carousel-post-header">
+    <span>Carousel 04</span>
+    <strong>The "earning rest" carousel — guilt and high achievers</strong>
+  </div>
+  <div class="carousel-slides">
+    <div class="slide">
+      <span class="slide-num">Slide 1 — Hook</span>
+      <div class="slide-text">"When did resting start feeling like something you have to earn?"</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 2 — Name the trap</span>
+      <div class="slide-text small">You finish the list. Then you start the next list. The rest you were going to allow yourself keeps getting deferred. There's always one more thing first.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 3 — The science</span>
+      <div class="slide-text">Rest is not a reward for productivity. It is a biological requirement. The nervous system was designed to return to it — not earn it.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 4 — The Stoic reframe</span>
+      <div class="slide-text small">Marcus Aurelius ran an empire and wrote: "Rest is not idleness." He understood that the quality of the mind depends on giving it what it actually needs.</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 5 — The invitation</span>
+      <div class="slide-text">What if the most productive thing you could do today was stop trying to be productive for twenty minutes?</div>
+    </div>
+    <div class="slide">
+      <span class="slide-num">Slide 6 — CTA</span>
+      <div class="slide-text small">The Protocol gives you a structure for that twenty minutes. And makes the case — scientifically and philosophically — for why it matters. Link in bio.</div>
+      <div class="slide-cta">Read more</div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- SECTION 4: TIKTOK / SHORT-FORM VIDEO HOOKS -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="section">
+    <span class="section-label">Section 04</span>
+    <h2 class="section-title">TikTok & Short Video — Opening Lines</h2>
+    <p class="section-desc">The first 2 seconds determines everything on short-form video. These are spoken opening lines — direct to camera — designed to create an immediate "that's me" moment before the viewer can scroll past. Each pairs with a simple caption hook.</p>
+    <hr class="section-rule">
+    <div class="tiktok-grid">
+      <div class="tiktok-card">
+        <div class="tiktok-hook">"If you're tired in a way that rest doesn't fix — this is for you."</div>
+        <div class="tiktok-cta">Caption: What's actually happening when sleep stops working →</div>
+      </div>
+      <div class="tiktok-card">
+        <div class="tiktok-hook">"The fact that you're still <em>functioning</em> doesn't mean you're okay."</div>
+        <div class="tiktok-cta">Caption: For everyone who keeps showing up and nobody knows the cost</div>
+      </div>
+      <div class="tiktok-card">
+        <div class="tiktok-hook">"There's a thing your body does to shift from stress to calm in 90 seconds. Here it is."</div>
+        <div class="tiktok-cta">Caption: The physiological sigh — science-backed, takes 90 seconds</div>
+      </div>
+      <div class="tiktok-card">
+        <div class="tiktok-hook">"You used to feel like yourself. Then gradually — you didn't. Here's what that actually is."</div>
+        <div class="tiktok-cta">Caption: Not laziness. Not weakness. Something specific — and workable.</div>
+      </div>
+      <div class="tiktok-card">
+        <div class="tiktok-hook">"I want to talk about the kind of exhaustion that self-care tips don't touch."</div>
+        <div class="tiktok-cta">Caption: Why nothing seems to stick — and what actually goes to the source</div>
+      </div>
+      <div class="tiktok-card">
+        <div class="tiktok-hook">"Marcus Aurelius ruled an empire and he still protected his inner life daily. Here's the practice."</div>
+        <div class="tiktok-cta">Caption: The Stoic evening review — 5 minutes, changes everything</div>
+      </div>
+      <div class="tiktok-card">
+        <div class="tiktok-hook">"Your heart sends more signals to your brain than your brain sends to it. Which means this changes your state faster than thinking does."</div>
+        <div class="tiktok-cta">Caption: Heart coherence breathing — the 5-minute practice neuroscientists use</div>
+      </div>
+      <div class="tiktok-card">
+        <div class="tiktok-hook">"Three questions to ask yourself at the end of every day — from a 2,000-year-old practice that still works."</div>
+        <div class="tiktok-cta">Caption: The Stoic evening review — not self-criticism. Something kinder.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- SECTION 5: EMAIL SUBJECT LINES -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="section">
+    <span class="section-label">Section 05</span>
+    <h2 class="section-title">Email Subject Lines</h2>
+    <p class="section-desc">Organised by objective — for the welcome sequence, promotional emails, and the Signal Room newsletter. Lead with the feeling in every case. The preview text deepens the hook without giving the whole story.</p>
+    <hr class="section-rule">
+
+```
+<p style="font-size:0.75rem;color:var(--stone);margin-bottom:0.8rem;font-style:italic;">WELCOME SEQUENCE — after Three Signals download</p>
+<ul class="email-list" style="border:1px solid var(--fog);border-radius:0.8rem;overflow:hidden;margin-bottom:1.5rem;">
+  <li class="email-item">
+    <span class="email-tag-pill warm">Email 1</span>
+    <div>
+      <div class="email-subject">It arrived. A word before you open it.</div>
+      <div class="email-preview">You downloaded The Three Signals. Here's what I want you to know before you begin...</div>
+    </div>
+  </li>
+  <li class="email-item">
+    <span class="email-tag-pill warm">Email 2</span>
+    <div>
+      <div class="email-subject">Did you try the sigh? (Here's what people say happens.)</div>
+      <div class="email-preview">The simplest practice in The Three Signals — and the one that surprises people most...</div>
+    </div>
+  </li>
+  <li class="email-item">
+    <span class="email-tag-pill warm">Email 3</span>
+    <div>
+      <div class="email-subject">The thing that makes the Three Signals incomplete.</div>
+      <div class="email-preview">These are doorways. The Protocol is what lies behind them. Here's what seven days looks like...</div>
+    </div>
+  </li>
+  <li class="email-item">
+    <span class="email-tag-pill warm">Email 4</span>
+    <div>
+      <div class="email-subject">A question for you.</div>
+      <div class="email-preview">When did resting start feeling like something you had to earn? I've been thinking about that...</div>
+    </div>
+  </li>
+</ul>
+
+<p style="font-size:0.75rem;color:var(--stone);margin-bottom:0.8rem;font-style:italic;">PROTOCOL PROMOTIONAL — to the full list</p>
+<ul class="email-list" style="border:1px solid var(--fog);border-radius:0.8rem;overflow:hidden;margin-bottom:1.5rem;">
+  <li class="email-item">
+    <span class="email-tag-pill open">High open</span>
+    <div>
+      <div class="email-subject">Tired in a way that sleep doesn't fix?</div>
+      <div class="email-preview">This is for that specific kind of tired. The one that rest alone doesn't touch.</div>
+    </div>
+  </li>
+  <li class="email-item">
+    <span class="email-tag-pill open">High open</span>
+    <div>
+      <div class="email-subject">You're not broken. You're on the wrong frequency.</div>
+      <div class="email-preview">The 7-Day Beacon Protocol is for people who've tried things and found them hollow...</div>
+    </div>
+  </li>
+  <li class="email-item">
+    <span class="email-tag-pill bold">Bold</span>
+    <div>
+      <div class="email-subject">Seven days to return to yourself.</div>
+      <div class="email-preview">Not a programme. Not a system. A practice — for body, mind, and spirit.</div>
+    </div>
+  </li>
+  <li class="email-item">
+    <span class="email-tag-pill bold">Bold</span>
+    <div>
+      <div class="email-subject">What Marcus Aurelius did every evening (and why it works).</div>
+      <div class="email-preview">Three questions. Five minutes. A 2,000-year-old practice for seeing clearly.</div>
+    </div>
+  </li>
+  <li class="email-item">
+    <span class="email-tag-pill open">High open</span>
+    <div>
+      <div class="email-subject">The version of yourself you used to be.</div>
+      <div class="email-preview">You haven't lost them. You've just been broadcasting through too much noise to hear the signal.</div>
+    </div>
+  </li>
+</ul>
+
+<p style="font-size:0.75rem;color:var(--stone);margin-bottom:0.8rem;font-style:italic;">SIGNAL ROOM — ongoing newsletter</p>
+<ul class="email-list" style="border:1px solid var(--fog);border-radius:0.8rem;overflow:hidden;">
+  <li class="email-item">
+    <span class="email-tag-pill warm">Letter</span>
+    <div>
+      <div class="email-subject">On the art of putting things down.</div>
+      <div class="email-preview">A Stoic thought for a heavy week. Plus: the two-minute practice that changes what you carry...</div>
+    </div>
+  </li>
+  <li class="email-item">
+    <span class="email-tag-pill warm">Letter</span>
+    <div>
+      <div class="email-subject">What your body has been trying to tell you.</div>
+      <div class="email-preview">The body speaks first. The mind rationalises later. This week: learning to listen the other way around...</div>
+    </div>
+  </li>
+  <li class="email-item">
+    <span class="email-tag-pill warm">Letter</span>
+    <div>
+      <div class="email-subject">A quieter kind of strength.</div>
+      <div class="email-preview">This isn't about pushing harder. It's about building something that holds. On steadiness as a practice...</div>
+    </div>
+  </li>
+</ul>
+```
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- SECTION 6: SINGLE CAPTION POSTS -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="section">
+    <span class="section-label">Section 06</span>
+    <h2 class="section-title">Single-Image Caption Posts</h2>
+    <p class="section-desc">Short-form posts for between carousels. The visual is a simple, airy graphic — a quote or a single line. The caption deepens it. The CTA is always gentle — never pressured.</p>
+    <hr class="section-rule">
+    <div class="copy-grid">
+
+```
+  <div class="copy-card amber">
+    <span class="copy-tag amber">Quote post</span>
+    <div class="copy-text">"The obstacle is the path."<br><span style="font-size:0.85rem;color:var(--stone);">— Marcus Aurelius</span></div>
+    <div class="copy-text small" style="margin-top:0.8rem;">Caption: This is not a counsel of positivity. It is a counsel of direction. The thing in your way is not blocking the path — it is showing you exactly where to look. Whatever you are navigating right now: this is the practice.</div>
+    <p class="copy-note">Visual: white background, amber rule, Cormorant Garamond. Feels airy and considered.</p>
+  </div>
+
+  <div class="copy-card sage">
+    <span class="copy-tag sage">Reflection post</span>
+    <div class="copy-text">"Rest is not a reward for productivity. It is a biological necessity."</div>
+    <div class="copy-text small" style="margin-top:0.8rem;">Caption: You were not designed to earn your rest. Your nervous system was built to move between effort and restoration — not effort and more effort. If rest feels like a luxury you can't afford: that's the signal, not the problem.</div>
+    <p class="copy-note">Speaks directly to the guilt-about-rest pain point. High save and share potential.</p>
+  </div>
+
+  <div class="copy-card sky">
+    <span class="copy-tag sky">Science post</span>
+    <div class="copy-text">Your heart sends more signals to your brain than your brain sends to your heart.</div>
+    <div class="copy-text small" style="margin-top:0.8rem;">Caption: This is not metaphor. It is neuroscience. The heart has its own nervous system — 40,000 neurons — and it actively shapes how the brain perceives the world. When the heart is in coherence, cortisol drops, creativity rises, and the body shifts out of threat mode. The practice takes 5 minutes. It works faster than almost anything else you can do.</div>
+    <p class="copy-note">Science credibility post — attracts the sceptical high achiever. Links naturally to Day 4 of the Protocol.</p>
+  </div>
+
+  <div class="copy-card navy">
+    <span class="copy-tag navy">Mission post</span>
+    <div class="copy-text">"Your signal never went dark."</div>
+    <div class="copy-text small" style="margin-top:0.8rem;">Caption: This is the premise at the heart of everything we do here. Not that you need to be fixed. Not that you've failed. But that the frequency of who you actually are — underneath the exhaustion and the noise — has been transmitting all along. You just need to return to it. That's what the practice is for. Stand Steady ⚓</div>
+    <p class="copy-note">Core brand statement post. Use this as the first pinned post and return to it regularly. High save rate expected.</p>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- SECTION 7: WEBSITE MICROCOPY -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="section">
+    <span class="section-label">Section 07</span>
+    <h2 class="section-title">Website Microcopy — Feeling-Led</h2>
+    <p class="section-desc">Small pieces of copy that appear on the Protocol page — above the fold, in the download form, and in the confirmation message. Every word is doing work.</p>
+    <hr class="section-rule">
+    <div class="cta-pair">
+
+```
+  <div class="cta-block amber">
+    <span class="cta-label amber">Above the fold — Protocol page hero</span>
+    <div class="cta-heading">For when you're tired in a way that rest doesn't reach.</div>
+    <p class="cta-body">Seven days of practice for body, mind, and spirit — drawing on Stoic philosophy, modern neuroscience, and the quiet intelligence that lies beneath both. Not a programme. A return.</p>
+    <span class="cta-btn">Download free →</span>
+  </div>
+
+  <div class="cta-block sage">
+    <span class="cta-label sage">Email form header — Protocol page</span>
+    <div class="cta-heading">Enter your email. Receive the Protocol. Begin when you're ready.</div>
+    <p class="cta-body">No pressure. No noise. Your copy arrives immediately. Return to it as many times as you need — it meets you differently each time.</p>
+    <span class="cta-btn">Send it to me →</span>
+  </div>
+
+  <div class="cta-block sky">
+    <span class="cta-label sky">Confirmation message — after email submitted</span>
+    <div class="cta-heading">It's on its way. ⚓</div>
+    <p class="cta-body">Check your inbox — your Protocol is waiting. Before you open it: you don't need to be in crisis to benefit from this. You just need to be ready to listen to yourself again. That's enough.</p>
+    <span class="cta-btn">Download now →</span>
+  </div>
+
+  <div class="cta-block amber">
+    <span class="cta-label amber">Protocol page — "Who this is for" section</span>
+    <div class="cta-heading">This is for you if any of these are true right now:</div>
+    <p class="cta-body">You're tired in a way that sleep doesn't fix. · You keep functioning but don't know for how much longer. · Something has gone quiet inside you. · You've tried things and found them hollow. · You used to feel like yourself. You'd like to again.</p>
+    <span class="cta-btn">Begin here →</span>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- SECTION 8: CONTENT PILLARS FOR ONGOING SOCIAL -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="section">
+    <span class="section-label">Section 08</span>
+    <h2 class="section-title">Ongoing Content Pillars</h2>
+    <p class="section-desc">A simple repeating framework for your content calendar. Each pillar has its own visual treatment (sage / sky / amber) and its own voice. Rotate through them to serve all three audience profiles consistently.</p>
+    <hr class="section-rule">
+    <div class="copy-grid">
+
+```
+  <div class="copy-card sage">
+    <span class="copy-tag sage">Pillar 1 — The Body Signal (Sage)</span>
+    <div class="copy-text" style="font-size:1rem;">Science-backed practices. Short. Immediate. Credible.</div>
+    <div class="copy-text small" style="margin-top:0.6rem;">Post types: "Try this now" tutorials (physiological sigh, heart coherence), neuroscience facts presented simply, body-listening prompts. Speaks to the sceptic and the high achiever. Always rooted in research. Always immediately actionable.</div>
+    <p class="copy-note">Frequency: 2x per week. Visual: sage-toned, clean.</p>
+  </div>
+
+  <div class="copy-card sky">
+    <span class="copy-tag sky">Pillar 2 — The Mind's Sovereignty (Sky)</span>
+    <div class="copy-text" style="font-size:1rem;">Stoic philosophy translated into today's language.</div>
+    <div class="copy-text small" style="margin-top:0.6rem;">Post types: Stoic quotes with modern context, the dichotomy of control applied to real scenarios, the evening review explained, Marcus Aurelius and Seneca passages brought to life. Speaks to the thoughtful, the philosophical, the high achiever. Never preachy — always practical.</div>
+    <p class="copy-note">Frequency: 2x per week. Visual: sky-toned, considered.</p>
+  </div>
+
+  <div class="copy-card amber">
+    <span class="copy-tag amber">Pillar 3 — The Unseen Anchor (Amber)</span>
+    <div class="copy-text" style="font-size:1rem;">Soul-language meets quantum science. Warm, spacious, luminous.</div>
+    <div class="copy-text small" style="margin-top:0.6rem;">Post types: The observer practice, the RAS and intention, synchronicity and what it actually is, the intelligence beneath thought. Speaks to the spiritually displaced seeker and the midlife recalibrator. This is the most distinctive content — the one that makes The Beacon Telegraph unlike anything else.</div>
+    <p class="copy-note">Frequency: 1–2x per week. Visual: amber-warm, generous space.</p>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <div style="text-align:center;padding:2rem 0;border-top:1px solid var(--fog);margin-top:2rem;">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--navy);">Stand Steady ⚓</p>
+    <p style="font-size:0.72rem;color:var(--ghost);margin-top:0.5rem;letter-spacing:0.08em;">The Beacon Telegraph &nbsp;·&nbsp; thebeacontelegraph.com</p>
+    <p style="font-size:0.72rem;color:var(--morse);margin-top:0.8rem;letter-spacing:0.4em;">· ·  · —  — —</p>
+  </div>
+
+</div>
+</body>
+</html>
