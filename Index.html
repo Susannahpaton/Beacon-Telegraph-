@@ -1,1 +1,629 @@
- {
+ {<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Beacon Telegraph — Stop Performing Life and Start Living It</title>
+<meta name="description" content="Stop performing life and start living it. Ancient wisdom, modern neuroscience, and the quiet authority of the soul — for those finding their way back to themselves.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory:       #FDFBF7;
+  --parchment:   #F5F0E8;
+  --linen:       #EDE7DC;
+  --fog:         #E0D9CF;
+  --navy:        #1C3557;
+  --navy-soft:   #2D4F75;
+  --amber:       #D4893A;
+  --amber-warm:  #E8A855;
+  --amber-pale:  #FBF3E8;
+  --sage:        #6B8F71;
+  --sage-light:  #A8C5AC;
+  --sage-pale:   #EDF3EE;
+  --sky:         #8AACCF;
+  --sky-pale:    #EEF4FA;
+  --text-dark:   #2A2318;
+  --text-mid:    #5C5045;
+  --text-soft:   #8C7E72;
+  --text-ghost:  #B8AFA6;
+  --morse:       #C8A870;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--ivory);
+  color: var(--text-dark);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(253,251,247,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--fog);
+  padding: 0 2.5rem; height: 66px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 500;
+  color: var(--navy); text-decoration: none;
+  letter-spacing: 0.03em;
+  display: flex; align-items: center; gap: 0.65rem;
+}
+.nav-links { display: flex; align-items: center; gap: 2.2rem; }
+.nav-links a {
+  font-size: 0.75rem; font-weight: 400;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--text-soft); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--navy); }
+.nav-cta {
+  background: var(--amber) !important;
+  color: #fff !important;
+  padding: 0.45rem 1.2rem;
+  border-radius: 2rem;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: #c07830 !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--navy); }
+.mobile-menu {
+  display: none; position: fixed; top: 66px; left: 0; right: 0;
+  background: var(--ivory); border-bottom: 1px solid var(--fog);
+  padding: 1.5rem 2rem; flex-direction: column; gap: 1.2rem; z-index: 99;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; }
+
+/* ── HERO ─────────────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 9rem 2rem 6rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--ivory);
+}
+/* Soft radial light from above — ascension glow */
+.hero::before {
+  content: '';
+  position: absolute; top: -20%; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 700px;
+  background: radial-gradient(ellipse at center,
+    rgba(232,168,85,0.12) 0%,
+    rgba(138,172,207,0.07) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+/* Faint horizontal light rays */
+.hero::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 100%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 80px,
+    rgba(232,168,85,0.018) 80px,
+    rgba(232,168,85,0.018) 81px
+  );
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 0.68rem; font-weight: 400;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 1.4rem;
+  position: relative; z-index: 1;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 9vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.06;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+  max-width: 14ch;
+  position: relative; z-index: 1;
+  letter-spacing: -0.01em;
+}
+.hero h1 em { font-style: italic; color: var(--amber); font-weight: 300; }
+.hero-rule {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--amber-warm), transparent);
+  margin: 1.8rem auto;
+  position: relative; z-index: 1;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-weight: 300; font-style: italic;
+  color: var(--text-soft);
+  max-width: 44ch; line-height: 1.9;
+  margin-bottom: 2.8rem;
+  position: relative; z-index: 1;
+}
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+  position: relative; z-index: 1;
+}
+.btn-primary {
+  background: var(--navy); color: #fff;
+  padding: 0.9rem 2.1rem; border-radius: 2rem;
+  font-size: 0.77rem; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  text-decoration: none; transition: all 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--navy-soft); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(28,53,87,0.18); }
+.btn-secondary {
+  border: 1.5px solid var(--linen); color: var(--text-mid);
+  padding: 0.9rem 2.1rem; border-radius: 2rem;
+  font-size: 0.77rem; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  text-decoration: none; transition: all 0.2s;
+  display: inline-block; background: transparent;
+}
+.btn-secondary:hover { border-color: var(--navy); color: var(--navy); }
+.hero-scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  z-index: 1;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--fog), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+.scroll-text { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-ghost); }
+
+/* ── SHARED SECTION ───────────────────────────────────────────────────────── */
+.section { padding: 6rem 2rem; }
+.section-inner { max-width: 720px; margin: 0 auto; }
+.section-inner.wide { max-width: 1060px; }
+.section-eyebrow {
+  font-size: 0.68rem; font-weight: 400;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 1rem;
+}
+.section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 400;
+  line-height: 1.18; color: var(--navy); margin-bottom: 1.4rem;
+}
+.section h2 em { font-style: italic; }
+.lead-p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.05rem, 2vw, 1.2rem); font-style: italic;
+  color: var(--text-soft); line-height: 1.9; margin-bottom: 1.3rem;
+}
+.body-p {
+  font-size: 0.93rem; font-weight: 300;
+  color: var(--text-mid); line-height: 1.9; margin-bottom: 1rem;
+}
+.rule { border: none; border-top: 1px solid var(--fog); }
+
+/* ── MISSION ─────────────────────────────────────────────────────────────── */
+.mission-section { background: var(--ivory); }
+.mission-quote {
+  margin-top: 2.5rem;
+  border-left: 2px solid var(--amber-warm);
+  padding: 1.2rem 1.8rem;
+  background: var(--amber-pale);
+  border-radius: 0 0.8rem 0.8rem 0;
+}
+.mission-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-style: italic;
+  color: var(--navy); line-height: 1.75;
+}
+
+/* ── PILLARS ─────────────────────────────────────────────────────────────── */
+.pillars-section { background: var(--parchment); }
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin-top: 3rem;
+}
+.pillar-card {
+  background: var(--ivory);
+  border: 1px solid var(--fog);
+  border-radius: 1.2rem;
+  padding: 2.2rem 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pillar-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(28,53,87,0.08); }
+.pillar-orb {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.3rem; flex-shrink: 0;
+}
+.pillar-orb.stoic { background: var(--sky-pale); color: var(--navy); }
+.pillar-orb.neuro { background: var(--sage-pale); color: var(--sage); }
+.pillar-orb.spirit { background: var(--amber-pale); color: var(--amber); }
+.pillar-tag {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 400; margin-bottom: 0.5rem; display: block;
+}
+.pillar-tag.stoic { color: var(--sky); }
+.pillar-tag.neuro { color: var(--sage); }
+.pillar-tag.spirit { color: var(--amber); }
+.pillar-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 500;
+  color: var(--navy); margin-bottom: 0.5rem; line-height: 1.3;
+}
+.pillar-desc { font-size: 0.83rem; font-weight: 300; color: var(--text-mid); line-height: 1.75; }
+
+/* ── PRODUCTS ────────────────────────────────────────────────────────────── */
+.products-section { background: var(--ivory); }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem; margin-top: 3rem;
+}
+.product-card {
+  border-radius: 1.4rem; overflow: hidden;
+  border: 1px solid var(--fog);
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  background: var(--ivory);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(28,53,87,0.1); }
+.product-header {
+  padding: 2.2rem 2rem 1.5rem;
+  border-bottom: 1px solid var(--fog);
+}
+.product-header.taichi { background: linear-gradient(135deg, var(--sage-pale) 0%, var(--ivory) 100%); }
+.product-header.protocol { background: linear-gradient(135deg, var(--amber-pale) 0%, var(--ivory) 100%); }
+.product-label {
+  font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 400; margin-bottom: 0.6rem; display: block;
+}
+.product-label.taichi { color: var(--sage); }
+.product-label.protocol { color: var(--amber); }
+.product-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 400;
+  color: var(--navy); line-height: 1.2; margin-bottom: 0.4rem;
+}
+.product-sub { font-size: 0.8rem; font-weight: 300; color: var(--text-soft); font-style: italic; }
+.product-body { padding: 1.5rem 2rem 2rem; flex: 1; }
+.product-desc { font-size: 0.86rem; font-weight: 300; color: var(--text-mid); line-height: 1.8; margin-bottom: 1.5rem; }
+.product-cta {
+  display: inline-block;
+  font-size: 0.73rem; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  text-decoration: none; color: var(--navy);
+  border-bottom: 1.5px solid var(--amber);
+  padding-bottom: 1px;
+  transition: color 0.2s;
+}
+.product-cta:hover { color: var(--amber); }
+.product-free { font-size: 0.7rem; color: var(--text-ghost); margin-top: 0.6rem; font-style: italic; }
+
+/* ── LIGHT BEAM DIVIDER ──────────────────────────────────────────────────── */
+.beam-divider {
+  padding: 3rem 0;
+  text-align: center;
+  background: var(--ivory);
+}
+.beam-divider-inner {
+  display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+  max-width: 500px; margin: 0 auto;
+}
+.beam-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--fog), transparent); }
+.beam-morse { font-size: 0.75rem; letter-spacing: 0.45em; color: var(--morse); }
+
+/* ── QUOTE BAND ──────────────────────────────────────────────────────────── */
+.quote-section {
+  background: var(--sky-pale);
+  padding: 5.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(138,172,207,0.25);
+  border-bottom: 1px solid rgba(138,172,207,0.25);
+}
+.quote-section blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 300; font-style: italic;
+  color: var(--navy); max-width: 38ch;
+  margin: 0 auto 1.2rem; line-height: 1.7;
+}
+.quote-section cite {
+  font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--sky); font-style: normal;
+}
+
+/* ── NEWSLETTER ──────────────────────────────────────────────────────────── */
+.newsletter-section {
+  background: var(--parchment);
+  padding: 5.5rem 2rem;
+  text-align: center;
+}
+.newsletter-section h2 { max-width: 20ch; margin: 0 auto 0.8rem; }
+.newsletter-section .lead-p { max-width: 44ch; margin: 0 auto 2.5rem; }
+.signup-row {
+  display: flex; gap: 0.7rem; max-width: 460px; margin: 0 auto;
+  flex-wrap: wrap; justify-content: center;
+}
+.signup-row input[type="email"] {
+  flex: 1; min-width: 220px;
+  padding: 0.85rem 1.4rem;
+  border: 1.5px solid var(--fog);
+  background: var(--ivory);
+  color: var(--text-dark); border-radius: 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.88rem; font-weight: 300;
+  outline: none; transition: border-color 0.2s;
+}
+.signup-row input::placeholder { color: var(--text-ghost); }
+.signup-row input:focus { border-color: var(--amber); }
+.signup-row button {
+  background: var(--amber); color: #fff;
+  padding: 0.85rem 1.8rem; border: none; border-radius: 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.76rem; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  cursor: pointer; transition: background 0.2s; white-space: nowrap;
+}
+.signup-row button:hover { background: #c07830; }
+.signup-note { font-size: 0.7rem; color: var(--text-ghost); margin-top: 1rem; font-style: italic; }
+.signup-thanks { display: none; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--navy); }
+
+/* ── FOOTER ──────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--navy); padding: 3.5rem 2rem;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 400;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none; display: block; margin-bottom: 0.5rem;
+  letter-spacing: 0.03em;
+}
+.footer-tagline { font-size: 0.75rem; color: rgba(255,255,255,0.3); font-style: italic; margin-bottom: 1.8rem; }
+.footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.8rem; }
+.footer-links a {
+  font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--amber-warm); }
+.footer-morse { font-size: 0.72rem; letter-spacing: 0.45em; color: rgba(255,255,255,0.15); margin-bottom: 1rem; }
+.footer-copy { font-size: 0.67rem; color: rgba(255,255,255,0.2); }
+
+/* ── ANIMATIONS ──────────────────────────────────────────────────────────── */
+.fade-up { opacity: 0; transform: translateY(26px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media(max-width:640px) {
+  .nav-links { display: none; } .hamburger { display: flex; }
+  .hero { padding: 7rem 1.5rem 5rem; }
+  .section { padding: 4rem 1.5rem; }
+  .pillars-grid, .products-grid { grid-template-columns: 1fr; }
+  .quote-section, .newsletter-section { padding: 4rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg width="20" height="29" viewBox="0 0 20 29" fill="none">
+      <rect x="7" y="25" width="6" height="4" rx="1" fill="#1C3557"/>
+      <path d="M7 25 L5.5 13 L14.5 13 L13 25Z" fill="#1C3557"/>
+      <rect x="3.5" y="9.5" width="13" height="3.5" rx="0.8" fill="#1C3557"/>
+      <path d="M6.5 9.5 L7.8 3 L12.2 3 L13.5 9.5Z" fill="#1C3557"/>
+      <rect x="8" y="1" width="4" height="2" rx="0.6" fill="#D4893A"/>
+      <rect x="5.5" y="17" width="9" height="2.5" rx="0.4" fill="#D4893A" opacity="0.4"/>
+    </svg>
+    The Beacon Telegraph
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="taichi.html">T'ai Chi Walking</a>
+    <a href="protocol.html">The Protocol</a>
+    <a href="taichi.html" class="nav-cta">Begin Free</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="taichi.html">T'ai Chi Walking</a>
+  <a href="protocol.html">The 7-Day Beacon Protocol</a>
+  <a href="taichi.html">Begin Free →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow fade-up">The Beacon Telegraph</p>
+  <h1 class="fade-up" style="transition-delay:0.1s">Your signal<br>never went <em>dark.</em></h1>
+  <div class="hero-rule fade-up" style="transition-delay:0.18s"></div>
+  <p class="hero-sub fade-up" style="transition-delay:0.24s">Stop performing life and start living it — through the wisdom of the Stoics, the language of the body, and the quiet authority of the soul.</p>
+  <div class="hero-actions fade-up" style="transition-delay:0.32s">
+    <a href="taichi.html" class="btn-primary">Begin with T'ai Chi Walking</a>
+    <a href="protocol.html" class="btn-secondary">The 7-Day Protocol</a>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="section mission-section">
+  <div class="section-inner">
+    <p class="section-eyebrow fade-up">Our Mission</p>
+    <h2 class="fade-up">Stop performing life.<br><em>Start living it.</em></h2>
+    <p class="lead-p fade-up">Tired in a way that sleep doesn't fix. Going through the motions of a life that looks fine from the outside. Something has gone quiet inside you — and no productivity hack, holiday, or self-care routine has reached it.</p>
+    <p class="body-p fade-up">The Beacon Telegraph exists for that gap — between the life being performed and the life actually lived. It works at the intersection of three languages: the Stoic philosophy that builds an unshakeable interior, the neuroscience that explains what happens in a body under chronic pressure, and the spiritual intelligence that knows the difference between noise and signal.</p>
+    <p class="body-p fade-up">This is not about adding more to your life. It is about returning to what was always there — present, capable, and steady — beneath the exhaustion.</p>
+    <div class="mission-quote fade-up">
+      <p>"The impediment to action advances action. What stands in the way becomes the way."</p>
+    </div>
+  </div>
+</section>
+
+<!-- MORSE DIVIDER -->
+<div class="beam-divider">
+  <div class="beam-divider-inner">
+    <div class="beam-line"></div>
+    <span class="beam-morse">· ·  · —  — —</span>
+    <div class="beam-line"></div>
+  </div>
+</div>
+
+<!-- THREE PILLARS -->
+<section class="section pillars-section">
+  <div class="section-inner wide">
+    <p class="section-eyebrow fade-up" style="text-align:center">Three Languages of Restoration</p>
+    <h2 class="fade-up" style="text-align:center;max-width:26ch;margin-left:auto;margin-right:auto">The foundation of<br><em>everything we do</em></h2>
+    <div class="pillars-grid">
+
+      <div class="pillar-card fade-up">
+        <div class="pillar-orb stoic">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M11 5 L11 17M5 11 L17 11" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <span class="pillar-tag stoic">Stoic Philosophy</span>
+        <div class="pillar-name">The Internal Citadel</div>
+        <p class="pillar-desc">Practices for building a mind that holds steady under pressure. The dichotomy of control. The evening review. The art of responding rather than reacting.</p>
+      </div>
+
+      <div class="pillar-card fade-up" style="transition-delay:0.1s">
+        <div class="pillar-orb neuro">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M2 11 C4.5 11 4.5 5.5 7 5.5 C9.5 5.5 9.5 16.5 12 16.5 C14.5 16.5 14.5 8 17 8 C19.5 8 19.5 11 22 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="pillar-tag neuro">Neuroscience &amp; Biology</span>
+        <div class="pillar-name">The Body as Signal</div>
+        <p class="pillar-desc">The physiological sigh, heart coherence, the reticular activating system. Modern neuroscience as a practical toolkit for a regulated, responsive nervous system.</p>
+      </div>
+
+      <div class="pillar-card fade-up" style="transition-delay:0.2s">
+        <div class="pillar-orb spirit">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <polygon points="11,2 13,8 20,8 14.5,12.5 16.5,19 11,15 5.5,19 7.5,12.5 2,8 9,8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+        <span class="pillar-tag spirit">Spirituality &amp; Quantum</span>
+        <div class="pillar-name">The Unseen Anchor</div>
+        <p class="pillar-desc">The observer effect. Quantum consciousness. Universal faith. The intelligence beneath thought — and the profound stability that comes from trusting it.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section products-section">
+  <div class="section-inner wide">
+    <p class="section-eyebrow fade-up">Begin Here — Both Free</p>
+    <h2 class="fade-up">Two doorways in.<br><em>Choose yours.</em></h2>
+    <div class="products-grid">
+
+      <a href="taichi.html" class="product-card fade-up">
+        <div class="product-header taichi">
+          <span class="product-label taichi">Free Practice</span>
+          <div class="product-name">T'ai Chi Walking</div>
+          <div class="product-sub">A 9-minute guided movement sequence</div>
+        </div>
+        <div class="product-body">
+          <p class="product-desc">An interactive practice blending classical t'ai chi with mindful walking. Breathing guidance, ambient sound, and gentle bell cues. No experience needed — just a quiet space and nine minutes.</p>
+          <span class="product-cta">Begin the Practice →</span>
+          <p class="product-free">Free — no login, no download required</p>
+        </div>
+      </a>
+
+      <a href="protocol.html" class="product-card fade-up" style="transition-delay:0.1s">
+        <div class="product-header protocol">
+          <span class="product-label protocol">Free PDF Guide</span>
+          <div class="product-name">The 7-Day Beacon Protocol</div>
+          <div class="product-sub">A week of daily restoration practices</div>
+        </div>
+        <div class="product-body">
+          <p class="product-desc">For when you're tired in a way that sleep doesn't fix. Seven days of practice for body, mind, and spirit — drawing on Stoic philosophy, neuroscience, and the quiet intelligence of the soul. One idea, one practice, one anchor statement per day.</p>
+          <span class="product-cta">Download Free →</span>
+          <p class="product-free">Free — enter your email to receive it</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <blockquote class="fade-up">"Stop performing life and start living it."</blockquote>
+  <cite class="fade-up" style="color:var(--amber);">The Beacon Telegraph</cite>
+  <div style="width:40px;height:1px;background:rgba(138,172,207,0.3);margin:1.8rem auto;"></div>
+  <blockquote class="fade-up" style="font-size:clamp(1.1rem,2.2vw,1.5rem);opacity:0.75;">"You have power over your mind, not outside events.<br>Realise this, and you will find strength."</blockquote>
+  <cite class="fade-up">Marcus Aurelius &nbsp;&middot;&nbsp; Meditations</cite>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="section-inner">
+    <p class="section-eyebrow fade-up">The Signal Room</p>
+    <h2 class="fade-up">Stay connected<br><em>to the frequency.</em></h2>
+    <p class="lead-p fade-up">Occasional letters on Stoic practice, neuroscience tools, and the quiet work of restoration. No noise. Only signal.</p>
+    <form class="signup-row fade-up" name="newsletter" netlify netlify-honeypot="bot-field" onsubmit="handleSignup(event)">
+      <input type="hidden" name="form-name" value="newsletter">
+      <input type="text" name="bot-field" style="display:none">
+      <input type="email" name="email" placeholder="Your email address" required>
+      <button type="submit">Send the Signal</button>
+    </form>
+    <p class="signup-thanks" id="signupThanks">Welcome to the Signal Room. ⚓</p>
+    <p class="signup-note fade-up">No noise. Unsubscribe at any time.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="index.html">The Beacon Telegraph</a>
+  <p class="footer-tagline" style="font-style:normal;font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:0.3rem;">Stop performing life and start living it.</p>
+  <p class="footer-tagline">Stand Steady ⚓</p>
+  <nav class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="taichi.html">T'ai Chi Walking</a>
+    <a href="protocol.html">The Protocol</a>
+    <a href="mailto:signalroom@thebeacontelegraph.com">Contact</a>
+  </nav>
+  <p class="footer-morse">· ·  · —  — —</p>
+  <p class="footer-copy">&copy; 2025 The Beacon Telegraph &nbsp;&middot;&nbsp; thebeacontelegraph.com</p>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+window.addEventListener('load',()=>{setTimeout(()=>{document.querySelectorAll('.hero .fade-up').forEach(el=>el.classList.add('visible'));},80);});
+function handleSignup(e){
+  e.preventDefault();
+  const data=new FormData(e.target);
+  fetch('/',{method:'POST',body:data}).then(()=>showThanks()).catch(()=>showThanks());
+}
+function showThanks(){
+  document.querySelector('.signup-row').style.display='none';
+  document.getElementById('signupThanks').style.display='block';
+}
+</script>
+</body>
+</html>
